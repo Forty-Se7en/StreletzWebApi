@@ -1,0 +1,11 @@
+{
+  "Version": 1,
+  "Hash": "0Q7kfhLteVA3z8s9rQsA9gsFexr3DVEAKk5LaquG5qI=",
+  "Source": "StreletzProxyServer",
+  "BasePath": "_content/StreletzProxyServer",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}

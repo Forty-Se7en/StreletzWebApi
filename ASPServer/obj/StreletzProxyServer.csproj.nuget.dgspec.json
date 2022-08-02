@@ -1,0 +1,222 @@
+{
+  "format": 1,
+  "restore": {
+    "D:\\Projects\\C#\\Streletz\\StreletzProxy\\ASPServer\\StreletzProxyServer.csproj": {}
+  },
+  "projects": {
+    "D:\\Projects\\C#\\Streletz\\StreletzProxy\\ASPServer\\StreletzProxyServer.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Projects\\C#\\Streletz\\StreletzProxy\\ASPServer\\StreletzProxyServer.csproj",
+        "projectName": "StreletzProxyServer",
+        "projectPath": "D:\\Projects\\C#\\Streletz\\StreletzProxy\\ASPServer\\StreletzProxyServer.csproj",
+        "packagesPath": "C:\\Users\\megam\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\C#\\Streletz\\StreletzProxy\\ASPServer\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\megam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzAPI\\StreletzAPI.csproj": {
+                "projectPath": "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzAPI\\StreletzAPI.csproj"
+              },
+              "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzClient\\StreletzClient.csproj": {
+                "projectPath": "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzClient\\StreletzClient.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            },
+            "Swashbuckle.AspNetCore.Annotations": {
+              "target": "Package",
+              "version": "[6.4.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzAPI\\StreletzAPI.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzAPI\\StreletzAPI.csproj",
+        "projectName": "StreletzAPI",
+        "projectPath": "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzAPI\\StreletzAPI.csproj",
+        "packagesPath": "C:\\Users\\megam\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzAPI\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\megam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Newtonsoft.json": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzClient\\StreletzClient.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzClient\\StreletzClient.csproj",
+        "projectName": "StreletzClient",
+        "projectPath": "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzClient\\StreletzClient.csproj",
+        "packagesPath": "C:\\Users\\megam\\.nuget\\packages\\",
+        "outputPath": "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzClient\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\megam\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net6.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net6.0": {
+            "targetAlias": "net6.0",
+            "projectReferences": {
+              "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzAPI\\StreletzAPI.csproj": {
+                "projectPath": "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzAPI\\StreletzAPI.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net6.0": {
+          "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.AspNet.SignalR.Client": {
+              "target": "Package",
+              "version": "[2.4.3, )"
+            },
+            "System.Configuration.ConfigurationManager": {
+              "target": "Package",
+              "version": "[6.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.301\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

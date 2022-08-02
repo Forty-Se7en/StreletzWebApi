@@ -1,0 +1,12 @@
+D:\Projects\C#\Streletz\StreletzProxy\StreletzAPI\bin\Debug\net6.0\StreletzAPI.deps.json
+D:\Projects\C#\Streletz\StreletzProxy\StreletzAPI\bin\Debug\net6.0\StreletzAPI.dll
+D:\Projects\C#\Streletz\StreletzProxy\StreletzAPI\bin\Debug\net6.0\StreletzAPI.pdb
+D:\Projects\C#\Streletz\StreletzProxy\StreletzAPI\obj\Debug\net6.0\StreletzAPI.csproj.AssemblyReference.cache
+D:\Projects\C#\Streletz\StreletzProxy\StreletzAPI\obj\Debug\net6.0\StreletzAPI.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\C#\Streletz\StreletzProxy\StreletzAPI\obj\Debug\net6.0\StreletzAPI.AssemblyInfoInputs.cache
+D:\Projects\C#\Streletz\StreletzProxy\StreletzAPI\obj\Debug\net6.0\StreletzAPI.AssemblyInfo.cs
+D:\Projects\C#\Streletz\StreletzProxy\StreletzAPI\obj\Debug\net6.0\StreletzAPI.csproj.CoreCompileInputs.cache
+D:\Projects\C#\Streletz\StreletzProxy\StreletzAPI\obj\Debug\net6.0\StreletzAPI.dll
+D:\Projects\C#\Streletz\StreletzProxy\StreletzAPI\obj\Debug\net6.0\refint\StreletzAPI.dll
+D:\Projects\C#\Streletz\StreletzProxy\StreletzAPI\obj\Debug\net6.0\StreletzAPI.pdb
+D:\Projects\C#\Streletz\StreletzProxy\StreletzAPI\obj\Debug\net6.0\ref\StreletzAPI.dll

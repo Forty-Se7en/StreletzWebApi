@@ -1,0 +1,17 @@
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\obj\Debug\net6.0\StreletzClient.csproj.AssemblyReference.cache
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\obj\Debug\net6.0\StreletzClient.GeneratedMSBuildEditorConfig.editorconfig
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\obj\Debug\net6.0\StreletzClient.AssemblyInfoInputs.cache
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\obj\Debug\net6.0\StreletzClient.AssemblyInfo.cs
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\obj\Debug\net6.0\StreletzClient.csproj.CoreCompileInputs.cache
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\bin\Debug\net6.0\StreletzClient.deps.json
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\bin\Debug\net6.0\StreletzClient.dll
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\bin\Debug\net6.0\StreletzClient.pdb
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\bin\Debug\net6.0\StreletzAPI.dll
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\bin\Debug\net6.0\StreletzAPI.pdb
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\obj\Debug\net6.0\StreletzClient.csproj.CopyComplete
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\obj\Debug\net6.0\StreletzClient.dll
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\obj\Debug\net6.0\refint\StreletzClient.dll
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\obj\Debug\net6.0\StreletzClient.pdb
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\obj\Debug\net6.0\ref\StreletzClient.dll
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\obj\Debug\net6.0\StreletzClient.Properties.Resources.resources
+D:\Projects\C#\Streletz\StreletzProxy\StreletzClient\obj\Debug\net6.0\StreletzClient.csproj.GenerateResource.cache

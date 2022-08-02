@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "J+xwgFqjoU0SP+D52MmAOS8763F2jaL65E/5bteolZWfB/r5zyjJE48Hv8RQ9JKNMPypI9+D4pnfeGRnlDwS4A==",
+  "success": true,
+  "projectFilePath": "D:\\Projects\\C#\\Streletz\\StreletzProxy\\StreletzAPI\\StreletzAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\megam\\.nuget\\packages\\newtonsoft.json\\13.0.1\\newtonsoft.json.13.0.1.nupkg.sha512"
+  ],
+  "logs": []
+}
