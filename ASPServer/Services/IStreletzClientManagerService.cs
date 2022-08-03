@@ -1,6 +1,7 @@
 ﻿using StreletzAPI.Json;
 using StreletzAPI.Models;
 
+
 namespace StreletzProxyServer
 {
     public interface IStreletzClientManagerService
@@ -24,7 +25,7 @@ namespace StreletzProxyServer
 
         public Task<Info[]> GetGeoDevices();
 
-        public Task GetAllGeoDevices();
+        public Task<DeviceInfo[]> GetAllGeoDevices();
 
         public Task<Info[]> GetSegments();
 
@@ -38,12 +39,14 @@ namespace StreletzProxyServer
 
         #region Общее
 
-        public Task<bool> ExecuteCommand(string commandGuid, string[] recipients, string[] parameters);        
+        public Task<bool> ExecuteCommand(string commandGuid, string[] recipients, string[] parameters);
+
+        public Task<EventInfo[]> GetLastEvent();
 
         #endregion
 
         #region Команды управления разделами
-        
+
         public Task<bool> ArmZone(string guid);
 
         public Task<bool> DisarmZone(string guid);

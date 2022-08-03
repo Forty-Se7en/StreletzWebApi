@@ -22,12 +22,16 @@ namespace StreletzClient
 
         public EConnectionStatus ConnectionStatus { get; private set; } = EConnectionStatus.Disconnected;
 
-        public AccessInfo AccessInfoResult { get; set; } = null;
+        public AccessInfo? AccessInfoResult { get; set; } = null;
 
         public bool? LogOutResult { get; set; } = null;
 
         public bool? ExecuteCommandResult { get; set; } = null;
 
+        public List<DeviceInfo>? GetAllGeoDevicesResult { get; set; } = null;
+
+        public List<EventInfo> LastEvent { get; private set; }
+        object _lastEventLocker = new object();
         #endregion
 
         #region Hubs
@@ -107,7 +111,7 @@ namespace StreletzClient
 
             ConnectionStatus = EConnectionStatus.Connected;
             return new ConnectResult() { Success = true };
-        }        
+        }
 
         #endregion
 
@@ -278,8 +282,8 @@ namespace StreletzClient
 
         public async Task ExecuteCommand(string commandGuid, string[] targets, string[] args)
         {
-            var container = new ExCommandContainer();            
-            
+            var container = new ExCommandContainer();
+
             container.CommandGuid = Guid.Parse(commandGuid.ToLower());
 
             var objectsFor = new List<Guid>();
@@ -354,6 +358,13 @@ namespace StreletzClient
                 .ToArray();
         }
 
+        public async Task<EventInfo[]> GetLastEvent()
+        {
+            lock(_lastEventLocker)
+            {
+                return LastEvent?.ToArray() ?? null;
+            }
+        }
         #endregion
 
         #region Подписки на события
@@ -366,32 +377,9 @@ namespace StreletzClient
 
             });
 
-            _geoDataHubProxy.On<object>(BroadcastEventEnum.broadcastObjectStateItems.ToString(), (objStateItems) =>               // TODO for test only
-                {
-                    Console.WriteLine("broadcastObjectStateItems event");
-                    //AnalyzeObjectStateItems(objStateItems);
-                });
-
-            _geoDataHubProxy.On<object>(BroadcastEventEnum.broadcastEventInfoItems.ToString(), (eventInfoItems) =>               // TODO for test only
-            {
-                Console.WriteLine("broadcastEventInfoItems event");
-                //AnalyzeObjectStateItems(objStateItems);
-            });
-
-            _geoDataHubProxy.On<object>(BroadcastEventEnum.broadcastGeoData.ToString(), (objStateItems) =>               // TODO for test only
-            {
-                Console.WriteLine("broadcastGeoData event");
-                //AnalyzeObjectStateItems(objStateItems);
-            });
-
             _commonHubProxy.On<object>(EventEnum.getExecuteCommandsResult.ToString(), (result) =>
             {
                 ExecuteCommandsResult(result);
-            });
-
-            _geoDataHubProxy.On<object>(EventEnum.getAllGeoDevicesInfos.ToString(), (deviceInfoList) =>
-            {
-                //PrepareInitialGeoDevicesInfos(deviceInfoList);
             });
 
             // from Hub method: AccessInfoModel AuthenticateAndGetClientData(Credentials credentials) 
@@ -401,9 +389,9 @@ namespace StreletzClient
             });
 
             _geoDataHubProxy.On<object>(EventEnum.getLogoutResult.ToString(), (logoutResult) =>
-                {
-                    AnalyzeLogoutResult(logoutResult);
-                });
+            {
+                AnalyzeLogoutResult(logoutResult);
+            });
 
             // from Hub method: List<Geodata> GetInitialGeodataInfoItems(string connectionId) 
             _geoDataHubProxy.On<object>(EventEnum.getGeoDataInitial.ToString(), (geoDataModels) =>
@@ -411,7 +399,39 @@ namespace StreletzClient
                 PrepareInitialGeodata(geoDataModels);
             });
 
-        }   
+            _geoDataHubProxy.On<object>(BroadcastEventEnum.broadcastObjectStateItems.ToString(), (objStateItems) =>               // TODO for test only
+            {
+                Console.WriteLine("broadcastObjectStateItems event");
+                //AnalyzeObjectStateItems(objStateItems);
+            });
+
+            _geoDataHubProxy.On<object>(BroadcastEventEnum.broadcastEventInfoItems.ToString(), (eventInfoItems) =>               // TODO for test only
+            {
+                lock (_lastEventLocker)
+                {
+                    LastEvent = JsonConvert.DeserializeObject<List<EventInfo>>(eventInfoItems.ToString());
+                    this.ExecuteCommand(Commands.Wristband.SendMessage, new[] { "9c657747-8330-4943-ac22-996e0de000b5" } , new[] {$"{LastEvent.First().PathDescription}: {LastEvent.First().EventDescription}" });
+                }
+                //Console.WriteLine("broadcastEventInfoItems event");
+                //AnalyzeObjectStateItems(objStateItems);
+            });
+
+            _geoDataHubProxy.On<object>(BroadcastEventEnum.broadcastGeoData.ToString(), (objStateItems) =>               // TODO for test only
+            {
+                Console.WriteLine("broadcastGeoData event");
+                //AnalyzeObjectStateItems(objStateItems);
+            });            
+
+            _geoDataHubProxy.On<object>(EventEnum.getAllGeoDevicesInfos.ToString(), (deviceInfoList) =>
+            {
+                var resultList =
+                JsonConvert.DeserializeObject<List<DeviceInfo>>(
+                    deviceInfoList.ToString());
+                GetAllGeoDevicesResult = resultList;
+                //PrepareInitialGeoDevicesInfos(deviceInfoList);
+            });
+
+        }
 
         #region Event Handlers
 

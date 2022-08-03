@@ -2,6 +2,7 @@
 using StreletzAPI.Json;
 using StreletzAPI.Models;
 
+
 namespace StreletzProxyServer
 {
     public class StreletzClientManagerService : IStreletzClientManagerService
@@ -43,9 +44,10 @@ namespace StreletzProxyServer
             return await _client.GetGeoDevices();
         }
 
-        public async Task GetAllGeoDevices()
+        public async Task<DeviceInfo[]> GetAllGeoDevices()
         {
             await _client.GetAllGeoDevices();
+            return await WaitForGetAllGeoDevicesResult();            
         }
 
         public async Task<Info[]> GetSegments()
@@ -77,7 +79,12 @@ namespace StreletzProxyServer
         {
             await _client.ExecuteCommand(commandGuid, recipients, parameters);
             return await WaitForExecuteCommandResult();
-        }        
+        }
+
+        public async Task<EventInfo[]> GetLastEvent()
+        {
+            return await _client.GetLastEvent();
+        }
 
         #endregion
 
@@ -120,7 +127,8 @@ namespace StreletzProxyServer
         public async Task<bool> SendMessage(string[] recipients, string[] parameters)
         {
             await this.ExecuteCommand(Commands.Wristband.SendMessage, recipients, parameters);
-            return await WaitForExecuteCommandResult();
+            //return await WaitForExecuteCommandResult();
+            return true;
         }
 
         #endregion
@@ -148,6 +156,17 @@ namespace StreletzProxyServer
             _client.AccessInfoResult = null;
             return accessInfo;
         }        
+
+        async Task<DeviceInfo[]> WaitForGetAllGeoDevicesResult()
+        {
+            while (_client.GetAllGeoDevicesResult == null)
+            {
+                await Task.Delay(100);
+            }
+            var result = _client.GetAllGeoDevicesResult;
+            _client.GetAllGeoDevicesResult = null;
+            return result.ToArray();
+        }
 
         #endregion
     }

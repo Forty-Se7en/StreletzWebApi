@@ -2,6 +2,7 @@
 using StreletzAPI.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,9 +16,11 @@ namespace StreletzAPI
 
         #region Properties
 
-        public AccessInfo AccessInfoResult { get; set; }
+        public AccessInfo? AccessInfoResult { get; set; }
 
         public bool? ExecuteCommandResult { get; set; }
+
+        public List<DeviceInfo>? GetAllGeoDevicesResult { get; set; }
 
         public EConnectionStatus ConnectionStatus { get; }
 
@@ -54,7 +57,8 @@ namespace StreletzAPI
         #region Общее
 
         public Task ExecuteCommand(string commandGuid, string[] targets, string[] args);
-        
+
+        public Task<EventInfo[]> GetLastEvent();
 
         #endregion
 

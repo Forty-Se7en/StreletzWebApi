@@ -4,6 +4,7 @@ using StreletzAPI.Json;
 using StreletzProxyServer.Requests;
 using StreletzProxyServer.Responses;
 using Swashbuckle.AspNetCore.Annotations;
+using System.ComponentModel;
 
 namespace StreletzProxyServer
 {
@@ -31,10 +32,15 @@ namespace StreletzProxyServer
         [HttpPost]
         [Route("Connect")]
         [SwaggerOperation(Summary = "Соединиться с сервером", Tags = new[] { "Соединение и вход" })]
-        public async Task<ConnectResponse> Connect(ConnectRequest connectionRequest, CancellationToken token)
+        public async Task<IActionResult> Connect(ConnectRequest connectionRequest, CancellationToken token)
         {
             var result = await _streletzClientService.ConnectAsync(connectionRequest.Address);
-            return new ConnectResponse() { Connected = result.Success, ErrorMessage = result.ErrorMessage };            
+            if (result.Success)
+            {
+                return Ok("Connected");
+            }
+            else return base.Problem(result.ErrorMessage);
+            //return new ConnectResponse() { Connected = result.Success, ErrorMessage = result.ErrorMessage };            
         }
 
 
@@ -90,11 +96,12 @@ namespace StreletzProxyServer
         }
 
         [HttpGet]
-        [Route("GetAllGeoDevices")]
-        [SwaggerOperation(Summary = "Запросить текущее состояние (НЕ РАБОТАЕТ)", Tags = new[] { "Информация" })]
-        public async Task GetAllGeoDevices(CancellationToken token)
+        [Route("GetAllGeoDevicesStatus")]
+        [SwaggerOperation(Summary = "Запросить текущее состояние", Tags = new[] { "Информация" })]
+        public async Task<IActionResult> GetAllGeoDevicesStatus(CancellationToken token)
         {
-            await _streletzClientService.GetAllGeoDevices();
+            DeviceInfo[] result = await _streletzClientService.GetAllGeoDevices();
+            return Ok(result);
         }
 
         [HttpGet]
@@ -144,6 +151,16 @@ namespace StreletzProxyServer
 
         }
 
+        [HttpGet]
+        [Route("GetLastEvent")]
+        [SwaggerOperation(Summary = "Вернуть последнее событие", Tags = new[] { "Общее" })]
+        public async Task<IActionResult> GetLastEvent()
+        {
+            var result = await _streletzClientService.GetLastEvent();
+            if (result == null || result.Length == 0) return Ok("События отсуствуют");
+            else return Ok(result);
+        }
+
         #endregion
 
         #region События зоны
@@ -169,7 +186,7 @@ namespace StreletzProxyServer
         #region Команды управления разделами
 
         [HttpGet]
-        [Route("Arm/{zone}")]
+        [Route("Arm/{guid}")]
         [SwaggerOperation(Summary = "Поставить зону на охрану", Tags = new[] { "Команды управления разделами" })]
         public async Task<IActionResult> ArmZone(string guid, CancellationToken token)
         {
@@ -179,7 +196,7 @@ namespace StreletzProxyServer
         }
 
         [HttpGet]
-        [Route("Disarm/{zone}")]
+        [Route("Disarm/{guid}")]
         [SwaggerOperation(Summary = "Снять зону с охраны", Tags = new[] { "Команды управления разделами" })]
         public async Task<IActionResult> DisarmZone(string guid, CancellationToken token)
         {
@@ -189,7 +206,7 @@ namespace StreletzProxyServer
         }
 
         [HttpGet]
-        [Route("Rearm/{zone}")]
+        [Route("Rearm/{guid}")]
         [SwaggerOperation(Summary = "\"Перевзять\" зону на охрану", Tags = new[] { "Команды управления разделами" })]
         public async Task<IActionResult> RearmZone(string guid, CancellationToken token)
         {
@@ -199,7 +216,7 @@ namespace StreletzProxyServer
         }
 
         [HttpGet]
-        [Route("SignalZone/{zone}")]
+        [Route("SignalZone/{guid}")]
         [SwaggerOperation(Summary = "Моргание светодиодами всеми устройствами раздела (НЕ РЕАЛИЗОВАНО)", Tags = new[] { "Команды управления разделами" })]
         public async Task<IActionResult> SignalZone(string zone, CancellationToken token)
         {
@@ -236,7 +253,7 @@ namespace StreletzProxyServer
             if (request.Recipients == null || request.Recipients.Length < 1) 
                 return new BadRequestObjectResult("Количество получателей не может быть меньше одного");
             bool commandSend = await _streletzClientService.SendMessage(request.Recipients, request.Params);
-            if (commandSend) return new OkObjectResult("Команда успешно отправлена");
+            if (commandSend) return new OkObjectResult("Команда принята");
             else return new StatusCodeResult(StatusCodes.Status500InternalServerError);
         }
 
