@@ -52,6 +52,8 @@ namespace StreletzAPI
 
         public Task GetAllGeoDevices();
 
+        public Task<AnalogValuesObject[]> GetAnalogDevices();
+
         #endregion
 
         #region Общее

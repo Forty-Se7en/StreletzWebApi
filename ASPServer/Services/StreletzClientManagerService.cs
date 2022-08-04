@@ -69,7 +69,11 @@ namespace StreletzProxyServer
         {
             return await _client.GetAccessAreas();
         }
-        
+
+        public async Task<AnalogValuesObject[]> GetAnalogDevices()
+        {
+            return await _client.GetAnalogDevices();
+        }
 
         #endregion
 

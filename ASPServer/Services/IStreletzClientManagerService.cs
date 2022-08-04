@@ -35,6 +35,8 @@ namespace StreletzProxyServer
 
         public Task<Info[]> GetAccessAreas();
 
+        public Task<AnalogValuesObject[]> GetAnalogDevices();
+
         #endregion 
 
         #region Общее
