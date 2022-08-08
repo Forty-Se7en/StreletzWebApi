@@ -105,6 +105,15 @@ namespace StreletzProxyServer
         }
 
         [HttpGet]
+        [Route("GetAnalogDevices")]
+        [SwaggerOperation(Summary = "Запросить ингформацию об аналоговых устройствах", Tags = new[] { "Информация" })]
+        public async Task<IActionResult> GetAnalogDevices(CancellationToken token)
+        {
+            AnalogValuesObject[] result = await _streletzClientService.GetAnalogDevices();
+            return Ok(result);
+        }
+
+        [HttpGet]
         [Route("GetSegments")]
         [SwaggerOperation(Summary = "Запросить список сегментов", Tags = new[] { "Информация" })]
         public async Task<IActionResult> GetSegments(CancellationToken token)

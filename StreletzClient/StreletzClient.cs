@@ -365,6 +365,14 @@ namespace StreletzClient
                 return LastEvent?.ToArray() ?? null;
             }
         }
+
+        public async Task<AnalogValuesObject[]> GetAnalogDevices()
+        {
+            var analogValues = (await _analogValuesHubProxy.Invoke<IEnumerable<AnalogValuesObject>>("GetIntialAnalogValues", _connectionId))
+                .ToArray();
+            return analogValues;
+
+        }
         #endregion
 
         #region Подписки на события
@@ -410,7 +418,7 @@ namespace StreletzClient
                 lock (_lastEventLocker)
                 {
                     LastEvent = JsonConvert.DeserializeObject<List<EventInfo>>(eventInfoItems.ToString());
-                    this.ExecuteCommand(Commands.Wristband.SendMessage, new[] { "9c657747-8330-4943-ac22-996e0de000b5" } , new[] {$"{LastEvent.First().PathDescription}: {LastEvent.First().EventDescription}" });
+                    //this.ExecuteCommand(Commands.Wristband.SendMessage, new[] { "9c657747-8330-4943-ac22-996e0de000b5" } , new[] {$"{LastEvent.First().PathDescription}: {LastEvent.First().EventDescription}" });
                 }
                 //Console.WriteLine("broadcastEventInfoItems event");
                 //AnalyzeObjectStateItems(objStateItems);
