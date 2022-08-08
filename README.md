@@ -131,6 +131,101 @@
     }
   }
 ]
+#### /GetAnalogDevices
+##### Get
+Запрашивает инфаормацию об аналоговых устройствах:
+Пример ответа:
+[
+  {
+    "avInfo": {
+      "segment": "Сегмент 1",
+      "device": "1.1 КСГ РР-И-ПРО 2×S2",
+      "sensor": "1.1 КСГ РР-И-ПРО 2×S2",
+      "sensorType": "КСГ РР-И-ПРО 2×S2",
+      "partition": "001: Зона",
+      "radioParent": "",
+      "typeAnalog1": null,
+      "typeAnalog2": null,
+      "typeAnalog3": null,
+      "typeAnalog4": null,
+      "number": 1,
+      "name": "",
+      "description": "Контроллер сегмента с поддержкой ПРО-устройств",
+      "type": 28,
+      "subtype": 0,
+      "icon": "ks",
+      "objectGuid": "fd2e93ea-6c4d-4fe5-b213-4da1afa6e529"
+    },
+    "avState": {
+      "actuality": "63795560764",
+      "actualityColor": "orangeredColor",
+      "op": "0 В",
+      "oPcolor": "orangeredColor",
+      "rp": "",
+      "rPcolor": "transparentColor",
+      "fault": "Взлом, Неисправность ОП, Неисправность РП",
+      "faultColor": "orangeredColor",
+      "dv": "Вскрыт",
+      "dVcolor": null,
+      "temp": "25° C",
+      "analog1": "",
+      "analog1ForeColor": "foreColorGray",
+      "analog2": "",
+      "analog2ForeColor": "foreColorGray",
+      "analog3": "",
+      "analog3ForeColor": "foreColorGray",
+      "analog4": "",
+      "analog4ForeColor": "foreColorGray",
+      "timePoint": "0001-01-01T00:00:00",
+      "objectGuid": "fd2e93ea-6c4d-4fe5-b213-4da1afa6e529"
+    }
+  },
+  {
+    "avInfo": {
+      "segment": "Сегмент 1",
+      "device": "1.1 КСГ РР-И-ПРО 2×S2",
+      "sensor": "5 Аврора-ДТ-ПРО",
+      "sensorType": "Аврора-ДТ-ПРО",
+      "partition": "002: Зона",
+      "radioParent": "1.1 КСГ РР-И-ПРО 2×S2",
+      "typeAnalog1": "Дым",
+      "typeAnalog2": "Температура",
+      "typeAnalog3": "Запыленность",
+      "typeAnalog4": null,
+      "number": 5,
+      "name": "",
+      "description": "Комбинированный извещатель радиоканальный",
+      "type": 128,
+      "subtype": 16,
+      "icon": "Avrora-DTR",
+      "objectGuid": "c77d5234-9c66-486c-8e87-6060ec71a487"
+    },
+    "avState": {
+      "actuality": "63795560764",
+      "actualityColor": "orangeredColor",
+      "op": "3,1 В",
+      "oPcolor": "transparentColor",
+      "rp": "3,3 В",
+      "rPcolor": "transparentColor",
+      "fault": "",
+      "faultColor": "transparentColor",
+      "dv": "Закрыт",
+      "dVcolor": "transparentColor",
+      "temp": "-5° C",
+      "analog1": "25",
+      "analog1ForeColor": "foreColorBlack",
+      "analog2": "25,2° С",
+      "analog2ForeColor": "foreColorBlack",
+      "analog3": "0",
+      "analog3ForeColor": "foreColorBlack",
+      "analog4": "",
+      "analog4ForeColor": "foreColorGray",
+      "timePoint": "0001-01-01T00:00:00",
+      "objectGuid": "c77d5234-9c66-486c-8e87-6060ec71a487"
+    }
+  },
+  ... и т.д.
+]
 #### /GetSegments
 ##### Get
 Запрашивает информацию о сегментах:
