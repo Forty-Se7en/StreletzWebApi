@@ -44,13 +44,13 @@ namespace StreletzProxyServer
         }
 
 
-        [HttpPost]
-        [Route("Disconnect")]
-        [SwaggerOperation(Summary = "НЕ РЕАЛИЗОВАНО", Tags = new[] { "Соединение и вход" })]
-        public async Task<IActionResult> Disconnect()
-        {
-            return base.StatusCode(StatusCodes.Status501NotImplemented);
-        }
+        //[HttpPost]
+        //[Route("Disconnect")]
+        //[SwaggerOperation(Summary = "НЕ РЕАЛИЗОВАНО", Tags = new[] { "Соединение и вход" })]
+        //public async Task<IActionResult> Disconnect()
+        //{
+        //    return base.StatusCode(StatusCodes.Status501NotImplemented);
+        //}
 
         [HttpPost]
         [Route("Login")]
@@ -69,13 +69,13 @@ namespace StreletzProxyServer
 
         }
 
-        [HttpPost]
-        [Route("Logout")]
-        [SwaggerOperation(Summary = "НЕ РЕАЛИЗОВАНО", Tags = new[] { "Соединение и вход" })]
-        public async Task<IActionResult> Logout()
-        {
-            return base.StatusCode(StatusCodes.Status501NotImplemented);
-        }
+        //[HttpPost]
+        //[Route("Logout")]
+        //[SwaggerOperation(Summary = "НЕ РЕАЛИЗОВАНО", Tags = new[] { "Соединение и вход" })]
+        //public async Task<IActionResult> Logout()
+        //{
+        //    return base.StatusCode(StatusCodes.Status501NotImplemented);
+        //}
 
         #endregion
 
@@ -165,21 +165,21 @@ namespace StreletzProxyServer
 
         #region События зоны
 
-        [HttpGet]
-        [Route("Subscribe/{zone}")]
-        [SwaggerOperation(Summary = "Подписаться на события зоны (НЕ РЕАЛИЗОВАНО)", Tags = new[] { "События зоны" })]
-        public async Task<IActionResult> Subscribe(string zone, CancellationToken token)
-        {
-            return base.StatusCode(StatusCodes.Status501NotImplemented);
-        }
+        //[HttpGet]
+        //[Route("Subscribe/{zone}")]
+        //[SwaggerOperation(Summary = "Подписаться на события зоны (НЕ РЕАЛИЗОВАНО)", Tags = new[] { "События зоны" })]
+        //public async Task<IActionResult> Subscribe(string zone, CancellationToken token)
+        //{
+        //    return base.StatusCode(StatusCodes.Status501NotImplemented);
+        //}
 
-        [HttpGet]
-        [Route("GetLastEvents/{zone}")]
-        [SwaggerOperation(Summary = "Запросить последние события (НЕ РЕАЛИЗОВАНО)", Tags = new[] { "События зоны" })]
-        public async Task<IActionResult> GetEvents(string zone, CancellationToken token)
-        {
-            return base.StatusCode(StatusCodes.Status501NotImplemented);
-        }
+        //[HttpGet]
+        //[Route("GetLastEvents/{zone}")]
+        //[SwaggerOperation(Summary = "Запросить последние события (НЕ РЕАЛИЗОВАНО)", Tags = new[] { "События зоны" })]
+        //public async Task<IActionResult> GetEvents(string zone, CancellationToken token)
+        //{
+        //    return base.StatusCode(StatusCodes.Status501NotImplemented);
+        //}
 
         #endregion
 
@@ -215,13 +215,13 @@ namespace StreletzProxyServer
             else return StatusCode(520);
         }
 
-        [HttpGet]
-        [Route("SignalZone/{guid}")]
-        [SwaggerOperation(Summary = "Моргание светодиодами всеми устройствами раздела (НЕ РЕАЛИЗОВАНО)", Tags = new[] { "Команды управления разделами" })]
-        public async Task<IActionResult> SignalZone(string zone, CancellationToken token)
-        {
-            return base.StatusCode(StatusCodes.Status501NotImplemented);
-        }
+        //[HttpGet]
+        //[Route("SignalZone/{guid}")]
+        //[SwaggerOperation(Summary = "Моргание светодиодами всеми устройствами раздела (НЕ РЕАЛИЗОВАНО)", Tags = new[] { "Команды управления разделами" })]
+        //public async Task<IActionResult> SignalZone(string zone, CancellationToken token)
+        //{
+        //    return base.StatusCode(StatusCodes.Status501NotImplemented);
+        //}
 
         [HttpGet]
         [Route("DropProblems/{zone}")]
@@ -237,13 +237,13 @@ namespace StreletzProxyServer
 
         #region Управление браслетами
 
-        [HttpGet]
-        [Route("GetGeoDeviceLocation/{id}")]
-        [SwaggerOperation(Summary = "НЕ РЕАЛИЗОВАНО", Tags = new[] { "Управление браслетами" })]
-        public async Task<IActionResult> GetGeoDeviceLocation(string id, CancellationToken token)
-        {
-            return base.StatusCode(StatusCodes.Status501NotImplemented);
-        }
+        //[HttpGet]
+        //[Route("GetGeoDeviceLocation/{id}")]
+        //[SwaggerOperation(Summary = "НЕ РЕАЛИЗОВАНО", Tags = new[] { "Управление браслетами" })]
+        //public async Task<IActionResult> GetGeoDeviceLocation(string id, CancellationToken token)
+        //{
+        //    return base.StatusCode(StatusCodes.Status501NotImplemented);
+        //}
 
         [HttpPost]
         [Route("SendMessage")]
