@@ -270,6 +270,38 @@
 Запрашивает информацию о разделах: <br />
 Пример ответа: <br />
 ```
+[
+  {
+    "objectGuid": "663d07ea-0598-4da7-b5ec-764d0d2cdf99",
+    "number": 1,
+    "name": "Зона",
+    "description": "",
+    "type": 255,
+    "subtype": 4,
+    "icon": null
+  },
+  {
+    "objectGuid": "cf7240f9-4fbc-478c-841e-21b635b0d0c3",
+    "number": 2,
+    "name": "Зона",
+    "description": "",
+    "type": 255,
+    "subtype": 4,
+    "icon": null
+  },
+  {
+    "objectGuid": "05e84074-2450-474c-bae8-104aa94ae33c",
+    "number": 3,
+    "name": "Зона",
+    "description": "",
+    "type": 255,
+    "subtype": 4,
+    "icon": null
+  }
+]
+```
+Пример ошибки: <br />
+```
 { 
   "type": "https://tools.ietf.org/html/rfc7231#section-6.5.1", 
   "title": "One or more validation errors occurred.",
