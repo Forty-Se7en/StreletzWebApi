@@ -331,6 +331,7 @@ namespace StreletzClient
 
         public async Task<Info[]> GetGeoDevices()
         {
+            //if (_configuratorHubProxy == null) return null;
             return (await _configuratorHubProxy.Invoke<IEnumerable<Info>>(Methods.GetGeoDevicesMethodName, _connectionId)).ToArray();
         }
 
@@ -350,6 +351,11 @@ namespace StreletzClient
         {
             return (await _geoDataHubProxy.Invoke<IEnumerable<LogicalObjectInfo>>(Methods.GetPartitionGroupsInfosMethodName, _connectionId))
                 .ToArray();
+        }
+
+        public async Task<LogicalObjectInfo[]> GetOutputGroups()
+        {
+            return (await _geoDataHubProxy.Invoke<IEnumerable<LogicalObjectInfo>>(Methods.GetOutputGroupsInfosMethodName, _connectionId)).ToArray();
         }
 
         public async Task<Info[]> GetAccessAreas()

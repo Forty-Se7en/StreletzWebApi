@@ -12,6 +12,7 @@
         public const string GetPartitionGroupsInfosMethodName = "GetPartitionGroupsInfos";
         public const string GetPartitionsMethodName = "GetPartitions";
         public const string GetAccessAreasMethodName = "GetAccessAreas";
+        public const string GetOutputGroupsInfosMethodName = "GetOutputGroupsInfos";
 
         private const string ExecuteMacroMethodName = "ExecuteMacro";
         private const string GetSysUserGroupsMethodName = "GetSysUserGroups";
@@ -24,8 +25,7 @@
         private const string GetServerTimeMethodName = "GetServerTime";        
         private const string GetGeoDeviceTrackMethodName = "GetGeoDeviceTrack";        
         private const string GetPartitionsInfosMethodName = "GetPartitionsInfos";
-        private const string GetRelayGroupsMethodName = "GetRelayGroups";
-        private const string GetOutputGroupsInfosMethodName = "GetOutputGroupsInfos";
+        private const string GetRelayGroupsMethodName = "GetRelayGroups";        
         private const string GetFireAutomaticZonesInfosMethodName = "GetFireAutomaticZonesInfos";        
         private const string GetMapObjectsMethodName = "GetMapObjects";
         private const string GetInitialAnalogValuesMethodName = "GetIntialAnalogValues";

@@ -48,6 +48,8 @@ namespace StreletzAPI
 
         public Task<LogicalObjectInfo[]> GetPartitionsGroups();
 
+        public Task<LogicalObjectInfo[]> GetOutputGroups();
+
         public Task<Info[]> GetAccessAreas();
 
         public Task GetAllGeoDevices();

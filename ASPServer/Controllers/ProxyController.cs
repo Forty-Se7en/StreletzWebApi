@@ -11,7 +11,7 @@ namespace StreletzProxyServer
     [ApiController]
     //[Route("[controller]")]
     public class StreletzProxyController : ControllerBase
-    {        
+    {
         private readonly ILogger<StreletzProxyController> _logger;
         readonly IStreletzClientManagerService _streletzClientService;
 
@@ -34,13 +34,20 @@ namespace StreletzProxyServer
         [SwaggerOperation(Summary = "Соединиться с сервером", Tags = new[] { "Соединение и вход" })]
         public async Task<IActionResult> Connect(ConnectRequest connectionRequest, CancellationToken token)
         {
-            var result = await _streletzClientService.ConnectAsync(connectionRequest.Address);
-            if (result.Success)
+            try {
+                var result = await _streletzClientService.ConnectAsync(connectionRequest.Address);
+                if (result.Success)
+                {
+                    return Ok("Connected");
+                }
+                else return base.Problem(result.ErrorMessage);
+            //return new ConnectResponse() { Connected = result.Success, ErrorMessage = result.ErrorMessage };
+            //}
+            catch (Exception e)
             {
-                return Ok("Connected");
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
             }
-            else return base.Problem(result.ErrorMessage);
-            //return new ConnectResponse() { Connected = result.Success, ErrorMessage = result.ErrorMessage };            
         }
 
 
@@ -66,8 +73,8 @@ namespace StreletzProxyServer
                 ErrorMessage = result.NotAuthenticated
             };
             return response;
-
         }
+    
 
         //[HttpPost]
         //[Route("Logout")]
@@ -86,13 +93,21 @@ namespace StreletzProxyServer
         [SwaggerOperation(Summary = "Запросить информацию о браслетах и т.п.", Tags = new[] { "Информация" })]
         public async Task<IActionResult> GetGeoDevices(CancellationToken token)
         {
-            var items = await _streletzClientService.GetGeoDevices();            
-            var responce = new InfoResponse[items.Length];
-            for (int i = 0; i < items.Length; i++)
+            try
             {
-                responce[i] = InfoResponse.FromInfo(items[i]);
+                var items = await _streletzClientService.GetGeoDevices();
+                var responce = new InfoResponse[items.Length];
+                for (int i = 0; i < items.Length; i++)
+                {
+                    responce[i] = InfoResponse.FromInfo(items[i]);
+                }
+                return Ok(responce);
             }
-            return Ok(responce);
+            catch (Exception e)
+            {
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
+            }
         }
 
         [HttpGet]
@@ -100,17 +115,31 @@ namespace StreletzProxyServer
         [SwaggerOperation(Summary = "Запросить текущее состояние", Tags = new[] { "Информация" })]
         public async Task<IActionResult> GetAllGeoDevicesStatus(CancellationToken token)
         {
-            DeviceInfo[] result = await _streletzClientService.GetAllGeoDevices();
-            return Ok(result);
+            try {
+                DeviceInfo[] result = await _streletzClientService.GetAllGeoDevices();
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
+            }
         }
 
         [HttpGet]
         [Route("GetAnalogDevices")]
-        [SwaggerOperation(Summary = "Запросить ингформацию об аналоговых устройствах", Tags = new[] { "Информация" })]
+        [SwaggerOperation(Summary = "Запросить информацию об аналоговых устройствах", Tags = new[] { "Информация" })]
         public async Task<IActionResult> GetAnalogDevices(CancellationToken token)
         {
-            AnalogValuesObject[] result = await _streletzClientService.GetAnalogDevices();
-            return Ok(result);
+            try {
+                AnalogValuesObject[] result = await _streletzClientService.GetAnalogDevices();
+                return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
+            }
         }
 
         [HttpGet]
@@ -118,13 +147,20 @@ namespace StreletzProxyServer
         [SwaggerOperation(Summary = "Запросить список сегментов", Tags = new[] { "Информация" })]
         public async Task<IActionResult> GetSegments(CancellationToken token)
         {
-            var items = await _streletzClientService.GetSegments();
-            var responce = new InfoResponse[items.Length];
-            for (int i = 0; i < items.Length; i++)
-            {
-                responce[i] = InfoResponse.FromInfo(items[i]);
+            try {
+                var items = await _streletzClientService.GetSegments();
+                var responce = new InfoResponse[items.Length];
+                for (int i = 0; i < items.Length; i++)
+                {
+                    responce[i] = InfoResponse.FromInfo(items[i]);
+                }
+                return Ok(responce);
             }
-            return Ok(responce);
+            catch (Exception e)
+            {
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
+            }
         }
 
         [HttpGet]
@@ -132,17 +168,45 @@ namespace StreletzProxyServer
         [SwaggerOperation(Summary = "Запросить разделы", Tags = new[] { "Информация" })]
         public async Task<IActionResult> GetPartitions(string segmentGuid, CancellationToken token)
         {
-            if (string.IsNullOrEmpty(segmentGuid))
-            {
-                return BadRequest("Invalid segmentGuid");
+            try {
+                if (string.IsNullOrEmpty(segmentGuid))
+                {
+                    return BadRequest("Invalid segmentGuid");
+                }
+                var items = await _streletzClientService.GetPartitions(segmentGuid);
+                var responce = new InfoResponse[items.Length];
+                for (int i = 0; i < items.Length; i++)
+                {
+                    responce[i] = InfoResponse.FromInfo(items[i]);
+                }
+                return Ok(responce);
             }
-            var items = await _streletzClientService.GetPartitions(segmentGuid);
-            var responce = new InfoResponse[items.Length];
-            for (int i = 0; i < items.Length; i++)
+            catch (Exception e)
             {
-                responce[i] = InfoResponse.FromInfo(items[i]);
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
             }
-            return Ok(responce);
+        }
+
+        [HttpGet]
+        [Route("GetOutputGroups")]
+        [SwaggerOperation(Summary = "Запросить группы выходов", Tags = new[] { "Информация" })]
+        public async Task<IActionResult> GetOutputGroups(CancellationToken token)
+        {
+            try {
+                var items = await _streletzClientService.GetOutputGroups();
+                var responce = new LogicalObjectResponse[items.Length];
+                for (int i = 0; i < items.Length; i++)
+                {
+                    responce[i] = LogicalObjectResponse.FromLogicalObjectInfo(items[i]);
+                }
+                return Ok(responce);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
+            }
         }
 
         #endregion
@@ -154,9 +218,17 @@ namespace StreletzProxyServer
         [SwaggerOperation(Summary = "Выполнить команду по guid", Tags = new[] { "Общее" })]
         public async Task<IActionResult> ExecuteCommand(ExecuteCommandRequest request, CancellationToken token)
         {
-            bool result = await _streletzClientService.ExecuteCommand(request.CommandGuid, request.Recipients, request.Params);
-            if (result == true) return Ok("Выполнено");
-            else return StatusCode(520);
+            try
+            {
+                bool result = await _streletzClientService.ExecuteCommand(request.CommandGuid, request.Recipients, request.Params);
+                if (result == true) return Ok("Выполнено");
+                else return StatusCode(520);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
+            }
 
         }
 
@@ -165,9 +237,16 @@ namespace StreletzProxyServer
         [SwaggerOperation(Summary = "Вернуть последнее событие", Tags = new[] { "Общее" })]
         public async Task<IActionResult> GetLastEvent()
         {
-            var result = await _streletzClientService.GetLastEvent();
-            if (result == null || result.Length == 0) return Ok("События отсуствуют");
-            else return Ok(result);
+            try {
+                var result = await _streletzClientService.GetLastEvent();
+                if (result == null || result.Length == 0) return Ok("События отсуствуют");
+                else return Ok(result);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
+            }
         }
 
         #endregion
@@ -199,9 +278,16 @@ namespace StreletzProxyServer
         [SwaggerOperation(Summary = "Поставить зону на охрану", Tags = new[] { "Команды управления разделами" })]
         public async Task<IActionResult> ArmZone(string guid, CancellationToken token)
         {
-            bool result = await _streletzClientService.ArmZone(guid);
-            if (result == true) return Ok("Выполнено");
-            else return StatusCode(520);
+            try {
+                bool result = await _streletzClientService.ArmZone(guid);
+                if (result == true) return Ok("Выполнено");
+                else return StatusCode(520);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
+            }
         }
 
         [HttpGet]
@@ -209,9 +295,16 @@ namespace StreletzProxyServer
         [SwaggerOperation(Summary = "Снять зону с охраны", Tags = new[] { "Команды управления разделами" })]
         public async Task<IActionResult> DisarmZone(string guid, CancellationToken token)
         {
-            bool result = await _streletzClientService.DisarmZone(guid);
-            if (result == true) return Ok("Выполнено");
-            else return StatusCode(520);
+            try {
+                bool result = await _streletzClientService.DisarmZone(guid);
+                if (result == true) return Ok("Выполнено");
+                else return StatusCode(520);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
+            }
         }
 
         [HttpGet]
@@ -219,9 +312,16 @@ namespace StreletzProxyServer
         [SwaggerOperation(Summary = "\"Перевзять\" зону на охрану", Tags = new[] { "Команды управления разделами" })]
         public async Task<IActionResult> RearmZone(string guid, CancellationToken token)
         {
-            bool result = await _streletzClientService.RearmZone(guid);
-            if (result == true) return Ok("Выполнено");
-            else return StatusCode(520);
+            try {
+                bool result = await _streletzClientService.RearmZone(guid);
+                if (result == true) return Ok("Выполнено");
+                else return StatusCode(520);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
+            }
         }
 
         //[HttpGet]
@@ -237,9 +337,16 @@ namespace StreletzProxyServer
         [SwaggerOperation(Summary = "Сбросить пожары и неисправности", Tags = new[] { "Команды управления разделами" })]
         public async Task<IActionResult> DropProblems(string guid, CancellationToken token)
         {
-            bool result = await _streletzClientService.DropProblems(guid);
-            if (result == true) return Ok("Выполнено");
-            else return StatusCode(520);
+            try {
+                bool result = await _streletzClientService.DropProblems(guid);
+                if (result == true) return Ok("Выполнено");
+                else return StatusCode(520);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
+            }
         }
 
         #endregion
@@ -259,11 +366,18 @@ namespace StreletzProxyServer
         [SwaggerOperation(Summary = "Отправить сообщение", Tags = new[] { "Управление браслетами" })]
         public async Task<IActionResult> SendMessage(SendMessageRequest request, CancellationToken token)
         {
-            if (request.Recipients == null || request.Recipients.Length < 1) 
-                return new BadRequestObjectResult("Количество получателей не может быть меньше одного");
-            bool commandSend = await _streletzClientService.SendMessage(request.Recipients, request.Params);
-            if (commandSend) return new OkObjectResult("Команда принята");
-            else return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            try {
+                if (request.Recipients == null || request.Recipients.Length < 1)
+                    return new BadRequestObjectResult("Количество получателей не может быть меньше одного");
+                bool commandSend = await _streletzClientService.SendMessage(request.Recipients, request.Params);
+                if (commandSend) return new OkObjectResult("Команда принята");
+                else return new StatusCodeResult(StatusCodes.Status500InternalServerError);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
+            }
         }
 
         [HttpGet]
@@ -271,9 +385,16 @@ namespace StreletzProxyServer
         [SwaggerOperation(Summary = "Моргание светодиодами", Tags = new[] { "Управление браслетами" })]
         public async Task<IActionResult> SignalWristBand(string? guid, CancellationToken token)
         {
-            bool result = await _streletzClientService.SignalWristBand(guid);
-            if (result == true) return Ok("Выполнено");
-            else return StatusCode(520);
+            try {
+                bool result = await _streletzClientService.SignalWristBand(guid);
+                if (result == true) return Ok("Выполнено");
+                else return StatusCode(520);
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"EXCEPTION!\n{e}");
+                return base.Problem(title: e.Message, detail: e.StackTrace, type: e.GetType().ToString(), instance: e.Source, statusCode: 500);
+            }
         }
 
         #endregion
@@ -289,7 +410,7 @@ namespace StreletzProxyServer
         #endregion
 
         #region Methods
-        
+
 
         #endregion
 

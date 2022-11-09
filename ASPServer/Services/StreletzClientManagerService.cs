@@ -65,6 +65,11 @@ namespace StreletzProxyServer
             return await _client.GetPartitionsGroups();
         }
 
+        public async Task<LogicalObjectInfo[]> GetOutputGroups()
+        {
+            return await _client.GetOutputGroups();
+        }
+
         public async Task<Info[]> GetAccessAreas()
         {
             return await _client.GetAccessAreas();
